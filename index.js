@@ -244,7 +244,7 @@
           break;
         case 'E':
         case 'N':
-          it[change.path[i]] = change.rhs;
+          setInArray(it, change.path[i], change.rhs);
           break;
       }
     } else {
@@ -257,11 +257,20 @@
           break;
         case 'E':
         case 'N':
-          arr[index] = change.rhs;
+          setInArray(arr, index, change.rhs);
           break;
       }
     }
     return arr;
+  }
+
+  function setInArray(array, index, value) {
+    if (array.$set) {
+      array.$set(index, value)
+    }
+    else {
+      array[index] = value;
+    }
   }
 
   function applyChange(target, source, change) {
